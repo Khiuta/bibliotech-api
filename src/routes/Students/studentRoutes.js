@@ -5,7 +5,7 @@ import studentLoginRequired from '../../middlewares/studentLoginRequired';
 
 const router = Router();
 
-router.get('/', studentController.index);
+router.get('/', studentLoginRequired, studentController.index);
 router.post('/', studentController.store);
 
 export default router;

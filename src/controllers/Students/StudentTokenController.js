@@ -3,15 +3,15 @@ import Student from '../../models/Students/Student';
 
 class TokenController {
   async store(req, res) {
-    const { email = '', password = '' } = req.body;
+    const { full_name = '', password = '' } = req.body;
 
-    if (!email || !password) {
+    if (!full_name || !password) {
       return res.status(401).json({
         errors: ['Credenciais inválidas.'],
       });
     }
 
-    const student = await Student.findOne({ where: { email } });
+    const student = await Student.findOne({ where: { full_name } });
 
     if (!student) {
       return res.status(401).json({
@@ -26,7 +26,7 @@ class TokenController {
     }
 
     const { id } = student;
-    const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
+    const token = jwt.sign({ id, full_name }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 

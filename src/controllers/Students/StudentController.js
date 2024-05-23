@@ -4,7 +4,6 @@ class StudentController {
   async store(req, res){
     const {
       full_name,
-      username,
       password,
       student_class,
       grade,
@@ -13,7 +12,6 @@ class StudentController {
     try {
       const newStudent = await Student.create({
         full_name,
-        username,
         password,
         student_class,
         grade,

@@ -14,10 +14,6 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -12,9 +12,11 @@ import bookRoutes from './src/routes/Management/bookRoutes';
 import lendingRoutes from './src/routes/Management/lendingRoutes';
 import studentRoutes from './src/routes/Students/studentRoutes';
 import studentTokenRoutes from './src/routes/Students/studentTokenRoutes';
+import ratingRoutes from './src/routes/Management/ratingRoutes';
 
 const whiteList = [
   'http://localhost:3000',
+  'http:192.168.0.27:3000'
 ];
 
 const corsOptions = {
@@ -48,6 +50,7 @@ class App {
     this.app.use('/lending', lendingRoutes);
     this.app.use('/student', studentRoutes);
     this.app.use('/student-login', studentTokenRoutes);
+    this.app.use('/rating', ratingRoutes);
   }
 }
 

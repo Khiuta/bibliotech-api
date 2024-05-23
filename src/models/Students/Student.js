@@ -5,7 +5,6 @@ export default class Student extends Model {
   static init(sequelize) {
     super.init({
       full_name: Sequelize.TEXT,
-      username: Sequelize.STRING,
       password: Sequelize.VIRTUAL,
       password_hash: Sequelize.STRING,
       student_class: Sequelize.STRING,
