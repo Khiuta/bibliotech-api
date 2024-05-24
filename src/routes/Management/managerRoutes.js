@@ -5,7 +5,7 @@ import managerLoginRequired from "../../middlewares/managerLoginRequired";
 
 const router = Router();
 
-router.post('/', managerLoginRequired, managerController.store);
-router.get('/', managerLoginRequired, managerController.index);
+router.post('/', managerController.store);
+router.get('/', managerController.index);
 
 export default router;

@@ -3,15 +3,15 @@ import Manager from '../../models/Management/Manager';
 
 class TokenController {
   async store(req, res) {
-    const { email = '', password = '' } = req.body;
+    const { username = '', password = '' } = req.body;
 
-    if (!email || !password) {
+    if (!username || !password) {
       return res.status(401).json({
         errors: ['Credenciais inválidas.'],
       });
     }
 
-    const manager = await Manager.findOne({ where: { email } });
+    const manager = await Manager.findOne({ where: { username } });
 
     if (!manager) {
       return res.status(401).json({
@@ -26,7 +26,7 @@ class TokenController {
     }
 
     const { id } = manager;
-    const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
+    const token = jwt.sign({ id, username }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 

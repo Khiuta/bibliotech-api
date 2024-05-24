@@ -13,9 +13,11 @@ import lendingRoutes from './src/routes/Management/lendingRoutes';
 import studentRoutes from './src/routes/Students/studentRoutes';
 import studentTokenRoutes from './src/routes/Students/studentTokenRoutes';
 import ratingRoutes from './src/routes/Management/ratingRoutes';
+import requestRoutes from './src/routes/Management/requestRoutes';
 
 const whiteList = [
   'http://localhost:3000',
+  'http://localhost:5173',
   'http:192.168.0.27:3000'
 ];
 
@@ -51,6 +53,7 @@ class App {
     this.app.use('/student', studentRoutes);
     this.app.use('/student-login', studentTokenRoutes);
     this.app.use('/rating', ratingRoutes);
+    this.app.use('/request', requestRoutes);
   }
 }
 

@@ -1,4 +1,6 @@
 import Student from "../../models/Students/Student";
+import Rating from '../../models/Management/Rating';
+import Request from "../../models/Management/Request";
 
 class StudentController {
   async store(req, res){
@@ -30,6 +32,30 @@ class StudentController {
       return res.status(200).json(students)
     } catch (error) {
       return res.json(error)
+    }
+  }
+
+  async show(req, res) {
+    try {
+      const id = req.userId;
+      const student = await Student.findOne({
+        where: {
+          id,
+        },
+        include: [
+          Rating, Request,
+        ],
+        attributes: [
+          'id',
+          'full_name',
+          'student_class',
+          'grade',
+        ]
+      })
+
+      return res.status(200).json(student)
+    } catch (error) {
+      return res.status(404).json(error);
     }
   }
 }

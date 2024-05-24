@@ -8,7 +8,11 @@ export default class Manager extends Model {
         type: Sequelize.TEXT,
         defaultValue: '',
       },
-      email: {
+      surname: {
+        type: Sequelize.TEXT,
+        defaultValue: '',
+      },
+      username: {
         type: Sequelize.STRING,
         defaultValue: '',
       },

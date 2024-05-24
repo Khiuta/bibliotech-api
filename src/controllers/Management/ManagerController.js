@@ -3,11 +3,11 @@ import Manager from '../../models/Management/Manager';
 class ManagerController {
   async store(req, res) {
     const {
-      name, email, password,
+      name, surname, username, password,
     } = req.body
 
     try {
-      const newManager = await Manager.create({ name, email, password })
+      const newManager = await Manager.create({ name, surname, username, password })
 
       return res.status(200).json(newManager);
     } catch (error) {
