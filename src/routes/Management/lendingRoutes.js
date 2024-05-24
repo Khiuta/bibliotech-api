@@ -7,5 +7,6 @@ const router = Router();
 
 router.get('/', lendingController.index);
 router.post('/', lendingController.store);
+router.put('/:id', lendingController.update);
 
 export default router;

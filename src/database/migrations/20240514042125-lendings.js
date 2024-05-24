@@ -15,6 +15,14 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    book_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'books',
+        key: 'id',
+      },
+    },
     student_name: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -24,7 +32,7 @@ module.exports = {
       allowNull: false,
     },
     student_grade: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     lending_date_hidden: {
@@ -47,6 +55,10 @@ module.exports = {
     renewed: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
+    },
+    returned: {
+      type: Sequelize.BOOLEAN,
       defaultValue: false,
     },
     created_at: {
