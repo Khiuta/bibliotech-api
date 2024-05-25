@@ -43,6 +43,24 @@ class RequestController {
       return res.status(404).json(error);
     }
   }
+
+  async update(req, res){
+    try {
+      const { id, action } = req.params; // accepted | refused
+
+      await Request.update({
+        status: action,
+      }, {
+        where: {
+          id,
+        }
+      });
+
+      return res.status(200).json(action === 'accepted' ? 'Pedido aceito!' : 'Pedido recusado!');
+    } catch (error) {
+      return console.log(error);
+    }
+  }
 }
 
 export default new RequestController();

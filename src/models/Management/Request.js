@@ -26,7 +26,8 @@ export default class Request extends Model {
           model: Student,
           key: 'id',
         },
-      }
+      },
+      status: Sequelize.STRING,
     }, {
       sequelize,
     });

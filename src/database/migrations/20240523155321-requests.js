@@ -47,6 +47,10 @@ module.exports = {
         key: 'id',
       },
     },
+    status: {
+      type: Sequelize.STRING,
+      defaultValue: '',
+    },
     created_at: {
       type: Sequelize.DATE,
     },
