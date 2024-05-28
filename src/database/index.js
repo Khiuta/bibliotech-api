@@ -6,8 +6,9 @@ import Student from '../models/Students/Student';
 import Lending from '../models/Management/Lending';
 import Rating from '../models/Management/Rating';
 import Request from '../models/Management/Request';
+import Notification from '../models/Students/Notification';
 
-const models = [Manager, Book, Student, Lending, Rating, Request];
+const models = [Manager, Book, Student, Lending, Rating, Request, Notification];
 
 const connection = new Sequelize(databaseConfig);
 
@@ -20,4 +21,6 @@ Rating.belongsTo(Book);
 Rating.belongsTo(Student);
 Student.hasOne(Request);
 Request.belongsTo(Student);
+Student.hasMany(Notification);
+Notification.belongsTo(Student);
 // #endregion

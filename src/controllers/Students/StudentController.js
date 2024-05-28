@@ -1,6 +1,7 @@
 import Student from "../../models/Students/Student";
 import Rating from '../../models/Management/Rating';
 import Request from "../../models/Management/Request";
+import Notification from "../../models/Students/Notification";
 
 class StudentController {
   async store(req, res){
@@ -43,7 +44,7 @@ class StudentController {
           id,
         },
         include: [
-          Rating, Request,
+          Rating, Request, Notification
         ],
         attributes: [
           'id',
@@ -55,7 +56,7 @@ class StudentController {
 
       return res.status(200).json(student)
     } catch (error) {
-      return res.status(404).json(error);
+      return console.log(error)
     }
   }
 }
