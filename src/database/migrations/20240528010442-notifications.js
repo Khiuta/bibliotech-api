@@ -7,6 +7,10 @@ module.exports = {
       autoIncrement: true,
       primaryKey: true,
     },
+    notification_type: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     title: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -32,5 +36,5 @@ module.exports = {
     },
   }),
 
-  down: (queryInterface) => queryInterface.dropTable(''),
+  down: (queryInterface) => queryInterface.dropTable('notifications'),
 };
