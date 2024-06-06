@@ -15,7 +15,7 @@ export default async (req, res, next) => {
   try {
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
     const { id, full_name } = dados;
-
+1
     const student = await Student.findOne({
       where: {
         id,
@@ -33,7 +33,7 @@ export default async (req, res, next) => {
     req.userFullName = full_name;
     return next();
   } catch (e) {
-    return res.status(401).json({
+    return res.status(403).json({
       errors: ['Token expirado ou inválido.'],
     });
   }

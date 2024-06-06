@@ -21,6 +21,8 @@ export default class Rating extends Model {
           model: Student,
           key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       comment: Sequelize.TEXT,
       star_rating: Sequelize.FLOAT,

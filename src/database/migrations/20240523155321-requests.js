@@ -26,6 +26,8 @@ module.exports = {
         model: 'books',
         key: 'id',
       },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     },
     student_name: {
       type: Sequelize.STRING,
@@ -46,6 +48,8 @@ module.exports = {
         model: 'students',
         key: 'id',
       },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     },
     status: {
       type: Sequelize.STRING,

@@ -15,11 +15,13 @@ import studentTokenRoutes from './src/routes/Students/studentTokenRoutes';
 import ratingRoutes from './src/routes/Management/ratingRoutes';
 import requestRoutes from './src/routes/Management/requestRoutes';
 import notificationRoutes from './src/routes/Students/notificationRoutes';
+import noteRoutes from './src/routes/Management/noteRoutes';
 
 const whiteList = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'http:192.168.0.27:3000'
+  'http://192.168.0.27:3000',
+  'http://192.168.0.5:3000'
 ];
 
 const corsOptions = {
@@ -27,7 +29,7 @@ const corsOptions = {
     if (whiteList.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS.'));
+      callback(new Error(`${origin} Not allowed by CORS.`));
     }
   },
 };
@@ -56,6 +58,7 @@ class App {
     this.app.use('/rating', ratingRoutes);
     this.app.use('/request', requestRoutes);
     this.app.use('/notification', notificationRoutes);
+    this.app.use('/note', noteRoutes);
   }
 }
 

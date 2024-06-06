@@ -22,6 +22,8 @@ module.exports = {
         model: 'books',
         key: 'id',
       },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     },
     student_name: {
       type: Sequelize.STRING,
@@ -34,6 +36,14 @@ module.exports = {
     student_grade: {
       type: Sequelize.INTEGER,
       allowNull: false,
+    },
+    student_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'students',
+        key: 'id'
+      }
     },
     lending_date_hidden: {
       type: Sequelize.STRING,

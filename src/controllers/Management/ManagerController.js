@@ -1,4 +1,5 @@
 import Manager from '../../models/Management/Manager';
+import Note from '../../models/Management/Note';
 
 class ManagerController {
   async store(req, res) {
@@ -17,11 +18,34 @@ class ManagerController {
 
   async index(req, res) {
     try {
-      const managers = await Manager.findAll();
+      const managers = await Manager.findAll({
+        include: [
+          Note,
+        ]
+      });
 
       return res.status(200).json(managers)
     } catch (error) {
       return res.json(error)
+    }
+  }
+
+  async show(req, res){
+    const id = req.userId;
+
+    try {
+      const manager = await Manager.findOne({
+        where: {
+          id,
+        },
+        include: [
+          Note,
+        ]
+      })
+
+      return res.status(200).json(manager);
+    } catch (error) {
+      return console.log(error);
     }
   }
 }

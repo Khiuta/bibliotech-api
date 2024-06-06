@@ -19,11 +19,7 @@ module.exports = {
         allowNull: false,
       },
       edition: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      volume: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       editor: {
@@ -34,9 +30,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      ident_number: {
-        type: Sequelize.INTEGER,
+      image_path: {
+        type: Sequelize.STRING,
         allowNull: true,
+        defaultValue: '',
       },
       quantity: {
         type: Sequelize.INTEGER,
@@ -52,6 +49,20 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 0.0,
+      },
+      times_taken: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
+      scheduled_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'students',
+          key: 'id',
+        },
+        defaultValue: 0,
       },
       created_at: {
         type: Sequelize.DATE,

@@ -1,18 +1,27 @@
 import Sequelize, { Model } from 'sequelize';
+import Student from '../Students/Student';
 
 export default class Book extends Model {
   static init(sequelize) {
     super.init({
       title: Sequelize.STRING,
       author: Sequelize.STRING,
-      edition: Sequelize.INTEGER,
-      volume: Sequelize.INTEGER,
+      edition: Sequelize.STRING,
       editor: Sequelize.STRING,
+      image_path: Sequelize.STRING,
       release_year: Sequelize.INTEGER,
-      ident_number: Sequelize.INTEGER,
       quantity: Sequelize.INTEGER,
       available: Sequelize.INTEGER,
       rating: Sequelize.FLOAT,
+      times_taken: Sequelize.INTEGER,
+      scheduled_by: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: Student,
+          key: 'id',
+        },
+      },
     }, {
       sequelize,
     });
