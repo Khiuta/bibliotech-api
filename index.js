@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import path from 'path';
 
 dotenv.config();
 import './src/database';
@@ -42,6 +43,7 @@ class App {
   }
 
   middlewares() {
+    this.app.use(express.static('public'));
     this.app.use(cors(corsOptions));
     this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));

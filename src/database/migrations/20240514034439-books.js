@@ -56,13 +56,9 @@ module.exports = {
         defaultValue: 0,
       },
       scheduled_by: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BOOLEAN,
         allowNull: true,
-        references: {
-          model: 'students',
-          key: 'id',
-        },
-        defaultValue: 0,
+        defaultValue: false,
       },
       created_at: {
         type: Sequelize.DATE,

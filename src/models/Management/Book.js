@@ -14,14 +14,7 @@ export default class Book extends Model {
       available: Sequelize.INTEGER,
       rating: Sequelize.FLOAT,
       times_taken: Sequelize.INTEGER,
-      scheduled_by: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: Student,
-          key: 'id',
-        },
-      },
+      scheduled_by: Sequelize.BOOLEAN,
     }, {
       sequelize,
     });
