@@ -79,7 +79,7 @@ class BookController {
                   const buffer = Buffer.from(imageResponse.data, 'binary');
                   // tratamento da imagem
                   const resizedImageBuffer = await sharp(buffer)
-                      .resize({ width: 100, height: 350, fit: 'inside', withoutEnlargement: true }) // Defina o tamanho desejado aqui
+                      .resize({ width: 600, height: 800, fit: 'inside', withoutEnlargement: true }) // Defina o tamanho desejado aqui
                       .jpeg({ quality: 100, progressive: true })
                       .toBuffer();
 
@@ -149,7 +149,7 @@ class BookController {
               const book = filterBook();
               // checa se o livro tem imagem
               try {
-                let imageUrl = book[0].volumeInfo.imageLinks.thumbnail;
+                let imageUrl = book.volumeInfo.imageLinks.thumbnail;
                 imageUrl = imageUrl.replace('zoom=1', 'zoom=0');
 
                 const imageResponse = await axios({
@@ -160,11 +160,11 @@ class BookController {
                 const buffer = Buffer.from(imageResponse.data, 'binary');
                 // tratando a imagem
                 const resizedImageBuffer = await sharp(buffer)
-                    .resize({ width: 100, height: 350, fit: 'inside', withoutEnlargement: true }) // Defina o tamanho desejado aqui
+                    .resize({ width: 600, height: 800, fit: 'inside', withoutEnlargement: true }) // Defina o tamanho desejado aqui
                     .jpeg({ quality: 100, progressive: true })
                     .toBuffer();
 
-                const imagePath = path.join('./', 'public', '/images', `${book[0].id}.jpg`);
+                const imagePath = path.join('./', 'public', '/images', `${book.id}.jpg`);
                 fs.writeFileSync(imagePath, resizedImageBuffer);
 
                 const newBook = {
@@ -200,7 +200,6 @@ class BookController {
             }
           }
 
-          console.log(collection)
           return collection;
         }
 
