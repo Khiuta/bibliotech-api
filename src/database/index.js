@@ -21,9 +21,6 @@ Student.hasMany(Rating);
 Rating.belongsTo(Book);
 Rating.belongsTo(Student);
 
-Book.belongsTo(Student);
-Student.hasOne(Book);
-
 Book.hasOne(Request);
 Student.hasOne(Request);
 Request.belongsTo(Book);

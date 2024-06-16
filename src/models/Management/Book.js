@@ -6,6 +6,7 @@ export default class Book extends Model {
     super.init({
       title: Sequelize.STRING,
       author: Sequelize.STRING,
+      description: Sequelize.TEXT,
       edition: Sequelize.STRING,
       editor: Sequelize.STRING,
       image_path: Sequelize.STRING,

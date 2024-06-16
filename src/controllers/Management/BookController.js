@@ -86,9 +86,17 @@ class BookController {
                   const imagePath = path.join('./', 'public', '/images', `${book.id}.jpg`);
                   fs.writeFileSync(imagePath, resizedImageBuffer);
 
+                  let bookDescription = '';
+                  try {
+                    bookDescription = book.volumeInfo.description;
+                  } catch(e) {
+                    bookDescription = '';
+                  }
+
                   const newBook = {
                     title: data[i][0],
                     author: data[i][1],
+                    description: bookDescription,
                     release_year: data[i][3],
                     edition: data[i][4],
                     editor: data[i][5],
@@ -103,9 +111,17 @@ class BookController {
                   // se o livro não possui imagem, deixar a imagem do logo do bibliotech como capa
                   const imagePath = path.join('./', 'public', '/images', 'logo-png.png');
 
+                  let bookDescription = '';
+                  try {
+                    bookDescription = book.volumeInfo.description;
+                  } catch(e) {
+                    bookDescription = '';
+                  }
+
                   const newBook = {
                     title: data[i][0],
                     author: data[i][1],
+                    description: bookDescription,
                     release_year: data[i][3],
                     edition: data[i][4],
                     editor: data[i][5],
@@ -167,9 +183,17 @@ class BookController {
                 const imagePath = path.join('./', 'public', '/images', `${book.id}.jpg`);
                 fs.writeFileSync(imagePath, resizedImageBuffer);
 
+                let bookDescription = '';
+                try {
+                  bookDescription = book.volumeInfo.description;
+                } catch(e) {
+                  bookDescription = '';
+                }
+
                 const newBook = {
                   title: data[i][0],
                   author: data[i][1],
+                  description: bookDescription,
                   release_year: data[i][3],
                   edition: data[i][4],
                   editor: data[i][5],
@@ -183,9 +207,17 @@ class BookController {
               } catch(err) {
                 const imagePath = path.join('./', 'public', '/images', 'logo-png.png');
 
+                let bookDescription = '';
+                try {
+                  bookDescription = book.volumeInfo.description;
+                } catch(e) {
+                  bookDescription = '';
+                }
+
                 const newBook = {
                   title: data[i][0],
                   author: data[i][1],
+                  description: bookDescription,
                   release_year: data[i][3],
                   edition: data[i][4],
                   editor: data[i][5],
@@ -290,6 +322,7 @@ class BookController {
 
       return res.status(200).json(books)
     } catch (error) {
+      console.log(error)
       return res.json(error)
     }
   }
@@ -315,7 +348,11 @@ class BookController {
       for (let i = 0; i < ratings; i++) {
         rating_calc += book.Ratings[i].dataValues.star_rating
       }
-      rating_calc /= ratings;
+      if(ratings === 0){
+        rating_calc = 0;
+      } else {
+        rating_calc /= ratings;
+      }
       rating_calc = rating_calc.toFixed(1);
 
       await Book.update({
@@ -331,7 +368,7 @@ class BookController {
           id,
         },
         attributes: [
-          'id', 'title', 'author', 'available', 'rating', 'image_path'
+          'id', 'title', 'author', 'available', 'rating', 'image_path', 'description'
         ],
         include: [
           Rating,
@@ -349,7 +386,7 @@ class BookController {
     try {
       const bookIds = await Book.findAll({
         attributes: [
-          'id', 'title', 'times_taken', 'image_path'
+          'id', 'title', 'times_taken', 'image_path', 'rating'
         ],
         order: [
           ['times_taken', 'DESC']
