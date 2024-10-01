@@ -33,7 +33,7 @@ class LendingController {
       //pegando o id do livro
       const book_id = book.id;
       //achando o estudante que pegou o livro
-      const student = await Student.findOne({
+      let student = await Student.findOne({
         where: {
           full_name: student_name,
           student_class,
@@ -43,15 +43,31 @@ class LendingController {
       //atualizando o estado de poder pegar empréstimo do aluno
       //Com livro -> não pode pegar outro até entregar (can_borrow: false)
       //Sem livro -> pode pegar livro (can_borrow: true)
-      await Student.update({
-        can_borrow: false,
-      }, {
-        where: {
-          id: student.id,
-        }
-      })
+      let canBorrow;
+      if(student != null){
+        await Student.update({
+          can_borrow: false,
+        }, {
+          where: {
+            id: student.id,
+          }
+        })
+        canBorrow = false
+      } else {
+        student = await Student.create({
+          full_name: student_name,
+          password: '123456',
+          student_class,
+          grade: student_grade,
+          can_borrow: false,
+        })
+      }
+      // if(canBorrow === false){
+      //   return res.json('Esse aluno não pode realizar outro empréstimo no momento.')
+      // }
       //se há exemplares disponíveis no sistema
       if(book.available > 0){
+        console.log('tem exemplar')
         const newLending = await Lending.create({
           book_name,
           book_author,
@@ -66,7 +82,7 @@ class LendingController {
         });
         //atualizando o número de exemplares disponíveis do livro, através de variáveis auxiliares
         const newAvailable = book.available -= 1;
-        //atualizando o número de vezes que o número foi pego, usando a mesma lógica
+        //atualizando o número de vezes que o livro foi pego, usando a mesma lógica
         const newTimesTaken = book.times_taken += 1;
         //atualizando os dados do livro emprestado
         await Book.update({
@@ -111,6 +127,46 @@ class LendingController {
       return res.status(200).json(lendings);
     } catch (error) {
       return res.json(error)
+    }
+  }
+
+  //fetching lendings filtered by class
+  async fetchByClass(req, res){
+    try {
+      /*
+      Informática - 1
+      Finanças - 2
+      Seg. do Trabalho - 3
+      Agronegócio - 4
+      */
+      const class_id = req.params.class_id;
+      let class_name = '';
+      switch(class_name){
+        case 1:
+          class_name = 'Informática';
+          break;
+        case 2:
+          class_name = 'Finanças';
+          break;
+        case 3:
+          class_name = 'Seg. do Trabalho';
+          break;
+        case 4:
+          class_name = 'Agronegócio';
+          break;
+        default:
+          break;
+      }
+
+      const lendings = await Lending.findAll({
+        where: {
+          student_class: class_name
+        }
+      })
+
+      return res.json(lendings);
+    } catch (err) {
+      return console.log(err)
     }
   }
 

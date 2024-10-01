@@ -8,6 +8,7 @@ const router = Router();
 
 router.get('/', lendingController.index);
 router.get('/current_book', studentLoginRequired, lendingController.GetStudentLending);
+router.get('/:class_id', managerLoginRequired, lendingController.fetchByClass)
 
 router.post('/', managerLoginRequired, lendingController.store);
 
